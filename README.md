@@ -1,7 +1,6 @@
 # Proyecto TANTAKATU
 
-## Nombre Grupo: 
-Mercaderes  
+## Nombre Grupo: Mercaderes  
 URL de los integrantes: http://www.sucreciudadblanca.com/v2/
     
 ## INTEGRANTES:
