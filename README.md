@@ -1,7 +1,7 @@
 # Proyecto TANTAKATU
 
 ## Nombre Grupo: 
-Mercaderes
+Mercaderes  
 URL de los integrantes: http://www.sucreciudadblanca.com/v2/
     
 ## INTEGRANTES:
@@ -10,5 +10,5 @@ URL de los integrantes: http://www.sucreciudadblanca.com/v2/
 - Navarro Numa
 - Navarro Juan
 
-El URL de GitHub: https://github.com/georgeguitar/proyecto_tantakatu.git
-URL del sitio: https://dashboard.heroku.com/apps/tantakatu
+El URL de GitHub: https://github.com/georgeguitar/proyecto_tantakatu.git  
+URL del sitio: https://dashboard.heroku.com/apps/tantakatu  
