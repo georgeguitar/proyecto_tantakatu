@@ -5,7 +5,8 @@ Mercaderes
     
 # INTEGRANTES:
     Navarro Juan
-    NAvarro Numa
+    Navarro Numa
     Salazar Claudia
+	Bethsy Rodriguez
 
 Link de la página: http://www.sucreciudadblanca.com/v2/ 
