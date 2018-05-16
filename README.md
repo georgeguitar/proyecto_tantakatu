@@ -1,7 +1,7 @@
 # Proyecto TANTAKATU
 
 # Nombre Grupo: 
-    Equipo: Mercaderes
+Mercaderes
     
 # INTEGRANTES:
     Navarro Juan
