@@ -27,3 +27,10 @@ CREATE TABLE `usuario` (
   `tipo` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+create table categorias (
+	id int not null auto_increment,
+    descripcion varchar(50),
+    estado varchar(10),
+    primary key (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
