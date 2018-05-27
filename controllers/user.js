@@ -57,12 +57,12 @@ function signIn (req, res) {
 * Normal
 * Ej: http://localhost:13700/api/v1/users
 * Especificando
-* Ej: http://localhost:13700/api/v1/users?nombre=NUMA NAVARRO
+* Ej: http://localhost:13700/api/v1/users?q=NUMA NAVARRO
 */
 function getUsers (req, res){
 	// Busqueda especifica
 	if (Object.keys(req.query).length > 0) {
-		const nombre = req.query.nombre;
+		const nombre = req.query.q;
 
 		const sql = `SELECT nombre, email FROM usuarios WHERE nombre="${nombre}" AND tipo=1`
 		console.log(sql)
