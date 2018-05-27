@@ -21,7 +21,14 @@ api.put('/items', auth, itemCtrl.updateItem)
 **/
 api.post('/signup', userCtrl.signUp)
 api.post('/signin', userCtrl.signIn)
-api.get('/users', userCtrl.getUsers)
+api.get('/users', auth, userCtrl.getUsers)
+api.get('/users/:id', auth, userCtrl.getUser)
+api.put('/users/:id', auth, userCtrl.updateUser)
+api.delete('/users/:id', auth, userCtrl.deleteUser)
+
+/*
+* Para probar si el token funciona
+*/
 api.get('/private', auth, (req, res) => {
   res.status(200).send({ message: 'Tienes acceso' })
 })
