@@ -27,7 +27,7 @@ function getItems (req, res) {
 
 //Ej. http://localhost:13700/api/v1/items/1
 function getItem (req, res) {
-   var itemId = req.params.id;
+   const itemId = req.params.id;
    console.log(itemId);
 	
    var sql = `select * from items where id = ${itemId}`;
@@ -64,9 +64,9 @@ function insertItem (req, res) {
     });
 }
 
-//http://localhost:13700/api/v1/items/7
+//Ej. http://localhost:13700/api/v1/items/7
 function deleteItem (req, res) {
-   var itemId = req.params.id;
+   const itemId = req.params.id;
    console.log(itemId);
    
    var sql = `delete from items where id = ${itemId}`;
