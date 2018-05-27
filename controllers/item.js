@@ -6,7 +6,7 @@ const config = require('../config')
 
 const connection = mysql.createConnection(config.db)
 
-//Ej. http://localhost:13700/api/items?descripcion=lapices&estado=true
+//Ej. http://localhost:13700/api/v1/items?descripcion=lapices&estado=true
 function getItems (req, res) {
 	if (Object.keys(req.query).length > 0) {
 		const descripcion = req.query.descripcion;
