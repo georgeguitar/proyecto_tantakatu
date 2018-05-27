@@ -12,7 +12,7 @@ function getItems (req, res) {
 		var id = req.query.id;
 		console.log(req.query);
 		console.log(id);
-		res.send('Get one');
+		res.send('uno');
 	} else {
 		var sql = "select * from items";
 		connection.query(sql, function (err, result) {
