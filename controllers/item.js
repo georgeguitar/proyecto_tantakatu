@@ -6,15 +6,18 @@ const config = require('../config')
 
 const connection = mysql.createConnection(config.db)
 
+//Ej. http://localhost:13700/api/items?descripcion=lapices&estado=true
 function getItems (req, res) {
-	console.log(Object.keys(req.query).length);
 	if (Object.keys(req.query).length > 0) {
-		var id = req.query.id;
-		console.log(req.query);
-		console.log(id);
-		res.send('uno');
+		const descripcion = req.query.descripcion;
+		const estado = req.query.estado;
+		var sql = `select * from items where UPPER(descripcion) like ("%${descripcion}%") and estado = "${estado}"`;
+		connection.query(sql, function (err, result) {
+			if (err) return res.status(500).send({ message: `Error al recuperar items: ${err}` });
+		    res.status(200).send({ result })
+		});
 	} else {
-		var sql = "select * from items";
+		var sql = `select * from items`;
 		connection.query(sql, function (err, result) {
 			if (err) return res.status(500).send({ message: `Error al recuperar items: ${err}` });
 		    res.status(200).send({ result })
@@ -22,6 +25,7 @@ function getItems (req, res) {
 	}
 };
 
+//Ej. http://localhost:13700/api/v1/items/1
 function getItem (req, res) {
    var itemId = req.params.id;
    console.log(itemId);
@@ -35,6 +39,7 @@ function getItem (req, res) {
     });
 }
 
+//Ej. http://localhost:13700/api/v1/items
 function insertItem (req, res) {
 	const descripcion = req.body.descripcion;
 	const precio = req.body.precio;
@@ -59,6 +64,7 @@ function insertItem (req, res) {
     });
 }
 
+//http://localhost:13700/api/v1/items/7
 function deleteItem (req, res) {
    var itemId = req.params.id;
    console.log(itemId);
@@ -72,6 +78,7 @@ function deleteItem (req, res) {
    });
 }
 
+//Ej. http://localhost:13700/api/v1/items
 function updateItem (req, res) {
 	const descripcion = req.body.descripcion;
 	const precio = req.body.precio;
