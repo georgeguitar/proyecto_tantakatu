@@ -18,19 +18,21 @@ api.put('/items', auth, itemCtrl.updateItem)
 
 /**
 * Modulo categorias
-
+**/
 api.get('/categorias', auth, categoriaCtrl.getCategorias)
 api.get('/categorias/:id', auth, categoriaCtrl.getCategoria)
 api.post('/categorias', auth, categoriaCtrl.insertCategoria)
 api.delete('/categorias/:id', auth, categoriaCtrl.deleteCategoria)
-api.put('/categorias', auth, categoriaCtrl.updateCategoria)
-**/
+api.put('/categorias/:id', auth, categoriaCtrl.updateCategoria)
+api.get('/categoriaItems', auth, categoriaCtrl.getCategoriaItems)
+/*
 api.get('/categorias', categoriaCtrl.getCategorias)
 api.get('/categorias/:id', categoriaCtrl.getCategoria)
 api.post('/categorias',  categoriaCtrl.insertCategoria)
 api.delete('/categorias/:id', categoriaCtrl.deleteCategoria)
 api.put('/categorias/:id', categoriaCtrl.updateCategoria)
 api.get('/categoriaItems', categoriaCtrl.getCategoriaItems)
+*/
 /**
 * Modulo usuarios
 **/
