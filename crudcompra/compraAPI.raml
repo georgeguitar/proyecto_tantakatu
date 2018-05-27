@@ -1,0 +1,119 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: API Tantakatu
+host: "dashboard.heroku.com"
+x-basePath: 
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /compras:
+    get:
+      description: Muestra la lista de todas las compras
+      operationId: ListarCompras
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+     
+      responses:
+        '200':
+          description: compras response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/compras'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    post:
+      body:
+        schema: |
+          { "$schema": "http://json-schema.org/draft-03/schema",
+            "type": "object",
+            "description": "compras",
+            "properties": 
+            {
+              "id": { "type": "integer" },
+			  "idusuario": { "type": "integer" },
+			  "iditem": { "type": "integer" },
+              "cantidad": { "type": "integer"},
+              "total": { "type": "integer"},           
+            }
+          }
+   // put:
+      
+
+  /compras/{id}:
+    get:
+      description: Muestra la compra correspondiente al id inidcado
+      operationId: Compra
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      parameters:
+        - name: id
+          in: path
+          description: ID de la compra 
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Respuesta Compra
+          schema:
+            $ref: '#/definitions/compra'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    delete:
+        description: Elimina una compra con el id indicado
+        operationId: ElimnarCompra
+        parameters:
+          - name: id
+            in: path
+            description: Id de la Compra eliminada
+            required: true
+            type: integer
+            format: int64
+        responses:
+          '204':
+            description: Compra Eliminada
+          default:
+            description: unexpected error
+            schema:
+              $ref: '#/definitions/errorModel'
+      
+definitions:
+  compra:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador de compra, autoincrementable.
+      descripcion:
+        type: string
+        description: Descripcion de la compra.
+      estado:
+        type: string
+        description: Estado de la compra
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+type: string
