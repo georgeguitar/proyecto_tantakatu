@@ -56,6 +56,8 @@ module.exports = app => {
 app.delete('/categorias/:id', (req, res) => {
   var id = req.params.id;
   console.log(id);
+  var sql = 'delete from categorias where id = ' + id;
+  console.log(sql);
   connection.query('DELETE FROM categorias WHERE id= ? ', [id], (err, result) => {       
     res.send(JSON.stringify({
       "status": 204,
@@ -67,11 +69,13 @@ app.delete('/categorias/:id', (req, res) => {
   });
 });
 
+
+
 //Ejemplo: PUT http://localhost:8080/items
 app.put('/categorias/:id', (req, res) => {
-  const { id } = req.params.id;
+  var id  = req.params.id;
   console.log(id);
-  const newCategoria = req.body;  
+  var newCategoria = req.body;  
   console.log(newCategoria);
 
   connection.query('UPDATE categorias set ? WHERE id=? ',[newCategoria,id]  
@@ -84,7 +88,25 @@ app.put('/categorias/:id', (req, res) => {
   });
   //logger.info("Se actualizo el Usuario con id: "+ id);
 });
-/*
+
+app.get('/categoria', (req, res)=>{
+  var descripcion=req.query.id;
+  console.log(descripcion);
+ //var sql='SELECT items.descripcion FROM categorias JOIN items ON items.id_categoria=categorias.id'; /*WHERE categoria.descripcion='+descripcion;*/
+ //var sql= "SELECT * FROM categorias";
+ //console.log(sql);
+  connection.query('SELECT items.descripcion FROM categorias JOIN items ON items.id_categoria=categorias.id WHERE categorias.id= ?', [descripcion], (err,result)=>{
+    
+    res.send(JSON.stringify({
+      "status": 200,
+      "error": null,
+      "response": result
+     }));
+    console.log(result);
+  });
+});
+/* connection.query('SELECT i.descripcion FROM categorias c inner join items i WHERE= descripcion=?', [descripcion], (err,result)=>{
+  
 //Ejemplo: PUT http://localhost:8080/items
 //{"id":3 , "descripcion" : "Reglas",  "precio" : 4, "cantidad" : 1, "estado" : "disponible", "id_categoria" : 11, "id_usuario": 2}
 router.put('/items', function(req, res) {
