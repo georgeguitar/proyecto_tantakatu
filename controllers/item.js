@@ -27,7 +27,7 @@ function getItems (req, res) {
 
 //Ej. http://localhost:13700/api/v1/items/1
 function getItem (req, res) {
-   var itemId = req.params.id;
+   const itemId = req.params.id;
    console.log(itemId);
 	
    var sql = `select * from items where id = ${itemId}`;
@@ -59,21 +59,21 @@ function insertItem (req, res) {
 	console.log(sql);
 	
     connection.query(sql, function (err, result) {
-    	if (err) return res.status(500).send({ message: `Error al crear el usuario: ${err}` });
+    	if (err) return res.status(500).send({ message: `Error al crear el item: ${err}` });
     	res.status(201).send({ result })
     });
 }
 
-//http://localhost:13700/api/v1/items/7
+//Ej. http://localhost:13700/api/v1/items/7
 function deleteItem (req, res) {
-   var itemId = req.params.id;
+   const itemId = req.params.id;
    console.log(itemId);
    
    var sql = `delete from items where id = ${itemId}`;
    console.log(sql);
    
    connection.query(sql, function (err, result) {
-	   if (err) return res.status(500).send({ message: `Error al crear el usuario: ${err}` });
+	   if (err) return res.status(500).send({ message: `Error al eliminar el item: ${err}` });
 	   res.status(204).send({ result })
    });
 }
@@ -98,7 +98,7 @@ function updateItem (req, res) {
    console.log(sql);
    
    connection.query(sql, function (err, result) {
-	   if (err) return res.status(500).send({ message: `Error al actualizar el usuario: ${err}` });
+	   if (err) return res.status(500).send({ message: `Error al actualizar el item: ${err}` });
 	   res.status(200).send({ result })
    });
 }
