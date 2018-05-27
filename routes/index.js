@@ -1,7 +1,7 @@
 'use strict'
-
 const express = require('express')
 const itemCtrl = require('../controllers/item')
+const categoriaCtrl = require('../controllers/categoria')
 const userCtrl = require('../controllers/user')
 const auth = require('../middlewares/auth')
 
@@ -16,6 +16,21 @@ api.post('/items', auth, itemCtrl.insertItem)
 api.delete('/items/:id', auth, itemCtrl.deleteItem)
 api.put('/items', auth, itemCtrl.updateItem)
 
+/**
+* Modulo categorias
+
+api.get('/categorias', auth, categoriaCtrl.getCategorias)
+api.get('/categorias/:id', auth, categoriaCtrl.getCategoria)
+api.post('/categorias', auth, categoriaCtrl.insertCategoria)
+api.delete('/categorias/:id', auth, categoriaCtrl.deleteCategoria)
+api.put('/categorias', auth, categoriaCtrl.updateCategoria)
+**/
+api.get('/categorias', categoriaCtrl.getCategorias)
+api.get('/categorias/:id', categoriaCtrl.getCategoria)
+api.post('/categorias',  categoriaCtrl.insertCategoria)
+api.delete('/categorias/:id', categoriaCtrl.deleteCategoria)
+api.put('/categorias/:id', categoriaCtrl.updateCategoria)
+api.get('/categoriaItems', categoriaCtrl.getCategoriaItems)
 /**
 * Modulo usuarios
 **/
