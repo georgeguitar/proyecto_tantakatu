@@ -9,8 +9,8 @@ module.exports = {
 // }
 db: {
     host: 'localhost',
-    user: 'juan',
-    password: 'beatles',
-    database: 'tantakatu'    
+    user: 'root',
+    password: '',
+    database: 'bdtantakatu'    
  }
 }
