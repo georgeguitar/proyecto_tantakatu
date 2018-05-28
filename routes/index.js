@@ -14,7 +14,7 @@ api.get('/items', auth, itemCtrl.getItems)
 api.get('/items/:id', auth, itemCtrl.getItem)
 api.post('/items', auth, itemCtrl.insertItem)
 api.delete('/items/:id', auth, itemCtrl.deleteItem)
-api.put('/items', auth, itemCtrl.updateItem)
+api.put('/items/:id', auth, itemCtrl.updateItem)
 
 /**
 * Modulo usuarios
