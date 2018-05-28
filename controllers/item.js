@@ -92,13 +92,15 @@ function deleteItem (req, res) {
 
 //Ej. http://localhost:13700/api/v1/items
 function updateItem (req, res) {
+	const itemId = req.params.id;
+	
 	const descripcion = req.body.descripcion;
 	const precio = req.body.precio;
 	const cantidad = req.body.cantidad;
 	const estado = req.body.estado;
 	const id_categoria = req.body.id_categoria;
 	const id_usuario = req.body.id_usuario;
-	const itemId = req.body.id;	
+
 	
    var sql = `UPDATE items  
 	   			SET descripcion = "${descripcion}", 
