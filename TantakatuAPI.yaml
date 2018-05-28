@@ -1,0 +1,449 @@
+---
+swagger: "2.0"
+info:
+  description: This is a sample API about TANTAKATU
+  version: 1.0.0
+  title: Swagger TANTAKATU
+  termsOfService: http://swagger.io/terms/  
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: tantakatu.herokuapp.com
+basePath: /api/v1
+tags:
+- name: TANTAKATU
+  description: Everything about TANTAKATU
+schemes:
+- https
+- http
+paths:
+  /categorias:
+    get:
+      tags:
+      - categorias
+      summary: Lista todas las categorias
+      description: Muestra la lista de todas las categorias
+      operationId: ListarCategorias
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+     
+      responses:
+        '200':
+          description: categorias response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/categoria'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    post:
+      tags:
+      - categorias
+      summary: Inserta una nueva categoria en app
+      description: Inserta una nueva categoria
+      operationId: addCategoria
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Categoria que sera insertada
+        required: true
+        schema:
+          $ref: '#/definitions/categoria'
+      responses:
+        405:
+          description: Invalid input
+      security:
+      - api_key: []
+  /categorias/{id}:
+    get:
+      tags:
+      - categorias
+      summary: Lista categoria por ID
+      description: Muestra la categoria correspondiente al id indicado
+      operationId: CategoriaId
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID de la categoria 
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Respuesta Categoria
+          schema:
+            $ref: '#/definitions/categoria'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: categoria not found
+      security:
+      - api_key: []
+    
+    put:
+        tags:
+        - categorias
+        summary: Actualiza categoria por ID
+        description: Actualiza una categoria con el id indicado
+        operationId: ActualizarCategoria
+        parameters:
+          - name: id
+            in: path
+            description: Id de la Categoria Actualizada
+            required: true
+            type: integer
+            format: int64
+        responses:
+          '204':
+            description: Categoria Actualizada
+          default:
+            description: unexpected error
+            schema:
+              $ref: '#/definitions/errorModel'
+    delete:
+        tags:
+        - categorias
+        summary: Elimina categoria por ID
+        description: Elimina una categoria con el id indicado
+        operationId: EliminarCategoria
+        parameters:
+          - name: id
+            in: path
+            description: Id de la Categoria eliminada
+            required: true
+            type: integer
+            format: int64
+        responses:
+          '204':
+            description: Categoria Eliminada
+          default:
+            description: unexpected error
+            schema:
+              $ref: '#/definitions/errorModel'
+  /categoriaItems/{descripcion}:
+    get:
+      tags:
+      - categorias
+      summary: Lista items por categoria 
+      description: Muestra los items correspondientes a la categoria indicada
+      operationId: CategoriaItems
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+        - name: descripcion
+          in: path
+          description: Descripcion de la categoria a listar
+          required: true
+          type: string
+          
+      responses:
+        '200':
+          description: Respuesta ItemsCategoria
+          schema:
+            $ref: '#/definitions/categoria'
+        400:
+          description: Invalid Description supplied
+        404:
+          description: item not found
+      security:
+      - api_key: []
+  /items:
+    get:
+      tags:
+      - items
+      summary: Lista todas los items por ID
+      description: Muestra la lista de todos los items
+      operationId: ListarItems
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+     
+      responses:
+        '200':
+          description: items response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/item'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    
+    post:
+      tags:
+      - items
+      summary: Inserta una nuevo item en app
+      description: Inserta un nuevo item
+      operationId: addItems
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: item que sera insertado
+        required: true
+        schema:
+          $ref: '#/definitions/item'
+      responses:
+        405:
+          description: Invalid input
+      security:
+      - api_key: []  
+    
+  /items/{id}:
+    get:
+      tags:
+      - items
+      summary: Lista item por ID
+      description: Muestra item correspondiente al id indicado
+      operationId: itemId
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID del item
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Respuesta item
+          schema:
+            $ref: '#/definitions/item'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: item not found
+      security:
+      - api_key: []
+    put:
+        tags:
+        - items
+        summary: Actualiza item por ID
+        description: Actualiza un item con el id indicado
+        operationId: ActualizarItem
+        parameters:
+          - name: id
+            in: path
+            description: Id de la item Actualizado
+            required: true
+            type: integer
+            format: int64
+        responses:
+          '204':
+            description: item Actualizado
+          default:
+            description: unexpected error
+            schema:
+              $ref: '#/definitions/errorModel'
+    delete:
+        tags:
+        - items
+        summary: Elimina item por ID
+        description: Elimina un item con el id indicado
+        operationId: EliminarItem
+        parameters:
+          - name: id
+            in: path
+            description: Id del item eliminado
+            required: true
+            type: integer
+            format: int64
+        responses:
+          '204':
+            description: item Eliminado
+          default:
+            description: unexpected error
+            schema:
+              $ref: '#/definitions/errorModel'
+  /users:
+    get:
+      tags:
+      - usuarios
+      summary: Lista todas los usuarios
+      description: Muestra la lista de todos los usuarios
+      operationId: ListarUsuarios
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+     
+      responses:
+        '200':
+          description: usuarios response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /users/{id}:
+    get:
+      tags:
+      - usuarios
+      summary: Lista usuario por id
+      description: Muestra usuario correspondiente al id indicado
+      operationId: UsuarioId
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID del usuario
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Respuesta usuario
+          schema:
+            $ref: '#/definitions/user'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: usuario not found
+      security:
+      - api_key: []
+  /compras:
+    get:
+      tags:
+      - compras
+      summary: Lista todas las compras
+      description: Muestra la lista de todas las compras
+      operationId: ListarCompras
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+     
+      responses:
+        '200':
+          description: compras response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/compra'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+securityDefinitions:
+  idea_auth:
+    type: oauth2
+    authorizationUrl: http://petstore.swagger.io/oauth/dialog
+    flow: implicit
+    scopes:
+      write:ideas: modifica ideas
+      read:ideas: lee ideas
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+    
+definitions:
+  categoria:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador de categoria, autoincrementable.
+      descripcion:
+        type: string
+        description: Descripcion de la idea.
+      estado:
+        type: string
+        description: Estado de la categoria
+  item:
+    type: object
+    properties:
+      idCategoria:
+        type: integer
+        description: Identificador de item, autoincrementable.
+      descripcion:
+        type: string
+        description: Descripcion del item.
+      precio:
+        type: number
+        description: Precio del item.
+      cantidad:
+        type: integer
+        description: Cantidad del item.
+      estado:
+        type: string
+        description: Estado del item.
+      id_categoria:
+        type: integer
+        description: Id Categoria.
+      id_usuario:
+        type: integer
+        description: Id Usuario
+  user:    
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador de usuario, autoincrementable.
+      nombre:
+        type: string
+        description: nombre del usuario.
+      email:
+        type: string
+        description: email del usuario.
+      tipo:
+        type: string
+        description: Tipo del usuario (0:administrador,1:General)
+      password:
+        type: string
+        description: password del item.
+  compra:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador de compra autoincrementable.
+      id_usuario:
+        type: integer
+        description: Identificador de usuario, autoincrementable.
+      id_item:
+        type: integer
+        description: Identificador de item autoincrementable.
+      cantidad:
+        type: integer
+        description: Cantidad de la compra
+      total:
+        type: integer
+        description: Total de la compra
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
