@@ -22,7 +22,7 @@ function signUp (req, res) {
         if (err) return res.status(500).send({ message: `Error al crear el usuario: ${err}` })
         
         return res.status(201).send({ token: service.createToken(user) })
-    });
+	})	
 }
 
 /*
@@ -33,7 +33,7 @@ function signUp (req, res) {
 function signIn (req, res) {
 	const email = req.body.email
 	const password = req.body.password
-
+	
 	const sql = `SELECT * FROM usuarios WHERE email = "${email}" AND password ="${password}"`
 	console.log(sql)
 	   
@@ -49,7 +49,7 @@ function signIn (req, res) {
 				token: service.createToken(user)
 			})            	
 		}
-	});   	
+	})	
 }
 
 /*
@@ -71,7 +71,7 @@ function getUsers (req, res){
 			if (result.length == 0) return res.status(404).send({message: 'No existe el usuario'})
 
 		    res.status(200).send({ result })
-		})
+		})		
 	//Busqueda en general
 	} else {
 		var sql = `SELECT * FROM usuarios`
@@ -81,7 +81,7 @@ function getUsers (req, res){
 			if (users.length == 0) return res.status(404).send({message: 'No existen usuarios'})
 
 			res.status(200).send({users})		
-		})
+		})		
 	}
 }
 
@@ -101,7 +101,7 @@ function getUser (req, res){
 		if (result.length == 0) return res.status(404).send({message: 'No existe el usuario'})
 
     	res.status(200).send({ result })
-    });	
+	})	
 }
 
 /*
