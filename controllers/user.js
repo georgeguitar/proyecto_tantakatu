@@ -75,7 +75,7 @@ function signIn (req, res) {
 */
 function getUsers (req, res){
 	// Busqueda especifica
-	if (Object.keys(req.query).length > 0) {
+	if (Object.keys(req.query).length = 1) {
 		const nombre = req.query.q;
 
 		const sql = `SELECT nombre, email FROM usuarios WHERE nombre="${nombre}" AND tipo=1`
@@ -93,8 +93,34 @@ function getUsers (req, res){
 		    res.status(200).send({ result })
 		});
 		connection.end();
-	//Busqueda en general
-	} else {
+		// Un usuario q cosas a comprado
+		// Ej: http://localhost:13700/api/v1/users?q=NUMA NAVARRO&tipo=compras
+	} else if (Object.keys(req.query).length > 1) {
+		const nombre = req.query.q;
+		const tipo = req.query.compras;
+		
+		const sql = `select u.nombre, i.descripcion, c.cantidad, c.total from usuarios as u
+					join compras as c
+					join items as i
+					where 
+					u.id = c.idusuario and
+					c.iditem =  i.id and
+					upper(u.nombre) like ("%${q}%");`
+		console.log(sql)
+		var connection = conectar();
+		connection.query(sql, function (err, result) {
+			if (err) {
+				var msg = `Error al recuperar el usuario: ${err}`;
+				logger.info();
+				logger.info(msg);
+				return res.status(500).send({ message: `${msg}` });
+			}
+			if (result.length == 0) return res.status(404).send({message: 'No se encontró datos'})
+
+		    res.status(200).send({ result })
+		});
+		connection.end();
+	} else {//Busqueda en general
 		var sql = `SELECT * FROM usuarios`
 		var connection = conectar();
 		connection.query(sql, function (err, users, fields) {
