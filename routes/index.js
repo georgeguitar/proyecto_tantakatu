@@ -3,6 +3,7 @@ const express = require('express')
 const itemCtrl = require('../controllers/item')
 const categoriaCtrl = require('../controllers/categoria')
 const userCtrl = require('../controllers/user')
+const compraCtrl = require('../controllers/compra')
 const auth = require('../middlewares/auth')
 
 const api = express.Router()
@@ -42,6 +43,11 @@ api.get('/users', auth, userCtrl.getUsers)
 api.get('/users/:id', auth, userCtrl.getUser)
 api.put('/users/:id', auth, userCtrl.updateUser)
 api.delete('/users/:id', auth, userCtrl.deleteUser)
+
+/**
+* Modulo Compras
+**/
+api.post('/compras',  compraCtrl.insertCompras)
 
 /*
 * Para probar si el token funciona
