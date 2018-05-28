@@ -11,15 +11,15 @@ function getItems (req, res) {
 	if (Object.keys(req.query).length > 0) {
 		const descripcion = req.query.descripcion;
 		const estado = req.query.estado;
-		var sql = `select * from items where UPPER(descripcion) like ("%${descripcion}%") and estado = "${estado}"`;
+		var sql = `select * from items where UPPER(descripcion) like1 ("%${descripcion}%") and estado = "${estado}"`;
 		var connection = conectar();
 		connection.query(sql, function (err, result) {
 			if (err) {
 				var msg = "Error al recuperar items";
-				logger.info();	
+				logger.info();
+				logger.info(`${msg}. ${err}`);
 				return res.status(500).send({ message: `${msg}: ${err}` });
 			}
-			logger.info("Se listaron los items");
 		    res.status(200).send({ result })
 		});
 		connection.end();
@@ -85,7 +85,7 @@ function deleteItem (req, res) {
    var connection = conectar();
    connection.query(sql, function (err, result) {
 	   if (err) return res.status(500).send({ message: `Error al eliminar el item: ${err}` });
-	   res.status(204).send({ result })
+	   res.status(204).send({ message: 'El item ha sido eliminado.' });
    });
    connection.end();
 }
