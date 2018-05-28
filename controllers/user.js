@@ -129,7 +129,7 @@ function deleteUser (req, res){
 
 		res.status(204).send({ message: 'El usuario ha sido eliminado' })		
 	});
-	connection.end();
+	//connection.end();
 }
 
 /*
