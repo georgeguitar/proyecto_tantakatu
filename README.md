@@ -1,13 +1,12 @@
 # Proyecto TANTAKATU
 
-## Nombre de Grupo: Mercaderes  
-URL de los integrantes: http://www.sucreciudadblanca.com/v2/
+# Nombre Grupo: 
+Mercaderes
     
-## INTEGRANTES:
-- Salazar Claudia
-- Rodriguez Bethsy
-- Navarro Numa
+# INTEGRANTES:
 - Navarro Juan
+- Navarro Numa
+- Salazar Claudia
+- Bethsy Rodriguez
 
-El URL de GitHub: https://github.com/georgeguitar/proyecto_tantakatu.git  
-URL del sitio: https://tantakatu.herokuapp.com/
+Link de la página: http://www.sucreciudadblanca.com/v2/ 
