@@ -101,6 +101,7 @@ function getUsers (req, res){
 		console.log(req.query)
 		const nombre = req.query.q;
 		const tipo = req.query.tipo;
+		// Tipo compras
 		if (tipo == "compras"){
 		
 			const sql = `SELECT u.nombre, i.descripcion, c.cantidad, c.total FROM usuarios AS u
@@ -125,7 +126,7 @@ function getUsers (req, res){
 			});
 			connection.end();
 		}
-
+		// tipo ventas
 		if (tipo == "ventas"){
 
 			const sql = `
