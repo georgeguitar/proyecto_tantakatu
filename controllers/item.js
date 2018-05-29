@@ -15,11 +15,11 @@ function getItems (req, res) {
 		var connection = conectar();
 		connection.query(sql, function (err, result) {
 			if (err) {
-				var msg = "Error al recuperar items";
-				logger.info();	
-				return res.status(500).send({ message: `${msg}: ${err}` });
+				var msg = `Error al recuperar items: ${err}`;
+				logger.info();
+				logger.info(msg);
+				return res.status(500).send({ message: `${msg}` });
 			}
-			logger.info("Se listaron los items");
 		    res.status(200).send({ result })
 		});
 		connection.end();
@@ -27,7 +27,12 @@ function getItems (req, res) {
 		var sql = `select * from items`;
 		var connection = conectar();
 		connection.query(sql, function (err, result) {
-			if (err) return res.status(500).send({ message: `Error al recuperar items: ${err}` });
+			if (err) {
+				var msg = `Error al recuperar items: ${err}`;
+				logger.info();
+				logger.info(msg);
+				return res.status(500).send({ message: `${msg}` });
+			}
 		    res.status(200).send({ result })
 		});
 		connection.end();
@@ -43,7 +48,12 @@ function getItem (req, res) {
    console.log(sql);
    var connection = conectar();
    connection.query(sql, function (err, result) {
-    	if (err) return res.status(500).send({ message: `Error al recuperar el item: ${err}` });
+    	if (err) {
+			var msg = `Error al recuperar el item: ${err}`;
+			logger.info();
+			logger.info(msg);    		
+    		return res.status(500).send({ message: `${msg}` });
+    	}
     	res.status(200).send({ result })
     });
    connection.end();
@@ -69,7 +79,12 @@ function insertItem (req, res) {
 	console.log(sql);
 	var connection = conectar();
     connection.query(sql, function (err, result) {
-    	if (err) return res.status(500).send({ message: `Error al crear el item: ${err}` });
+    	if (err) {
+			var msg = `Error al crear el item: ${err}`;
+			logger.info();
+			logger.info(msg);    		
+    		return res.status(500).send({ message: `${msg}` });
+    	}
     	res.status(201).send({ result })
     });
     connection.end();
@@ -84,21 +99,28 @@ function deleteItem (req, res) {
    console.log(sql);
    var connection = conectar();
    connection.query(sql, function (err, result) {
-	   if (err) return res.status(500).send({ message: `Error al eliminar el item: ${err}` });
-	   res.status(204).send({ result })
+	   if (err) {
+			var msg = `Error al eliminar el item: ${err}`;
+			logger.info();
+			logger.info(msg);
+			return res.status(500).send({ message: `${msg}` });
+	   }	   
+	   res.status(204).send({ message: 'El item ha sido eliminado.' });
    });
    connection.end();
 }
 
 //Ej. http://localhost:13700/api/v1/items
 function updateItem (req, res) {
+	const itemId = req.params.id;
+	
 	const descripcion = req.body.descripcion;
 	const precio = req.body.precio;
 	const cantidad = req.body.cantidad;
 	const estado = req.body.estado;
 	const id_categoria = req.body.id_categoria;
 	const id_usuario = req.body.id_usuario;
-	const itemId = req.body.id;	
+
 	
    var sql = `UPDATE items  
 	   			SET descripcion = "${descripcion}", 
@@ -110,7 +132,12 @@ function updateItem (req, res) {
    console.log(sql);
    var connection = conectar();
    connection.query(sql, function (err, result) {
-	   if (err) return res.status(500).send({ message: `Error al actualizar el item: ${err}` });
+	   if (err) {
+			var msg = `Error al actualizar el item: ${err}`;
+			logger.info();
+			logger.info(msg);
+		   return res.status(500).send({ message: `${msg}` });
+	   }
 	   res.status(200).send({ result })
    });
    connection.end();

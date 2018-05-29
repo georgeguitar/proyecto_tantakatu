@@ -4,6 +4,7 @@ const mysql = require('mysql')
 const conectar = require('../db')
 const service = require('../services')
 const config = require('../config')
+const logger = require('../log')
 
 //const connection = mysql.createConnection(config.db)
 
@@ -20,7 +21,12 @@ function signUp (req, res) {
   const sql = `INSERT INTO usuarios (nombre, email, password) VALUES ("${nombre}", "${email}", "${password}")`  
 	var connection = conectar();
     connection.query(sql, function (err, user) {
-        if (err) return res.status(500).send({ message: `Error al crear el usuario: ${err}` })
+        if (err) {
+			var msg = `Error al crear el usuario: ${err}`;
+			logger.info();
+			logger.info(msg);
+			return res.status(500).send({ message: `${msg}` });
+        }
         
         return res.status(201).send({ token: service.createToken(user) })
     });
@@ -40,7 +46,12 @@ function signIn (req, res) {
 	console.log(sql)
 	var connection = conectar();
 	connection.query(sql, (err, user) => {
-		if (err) return res.status(500).send({ message: err })
+		if (err) {
+			var msg = err;
+			logger.info();
+			logger.info(msg);
+			return res.status(500).send({ message: `${msg}` });
+		}
 		
 		console.log(user);
 		if (user.length == 0) {		
@@ -64,25 +75,61 @@ function signIn (req, res) {
 */
 function getUsers (req, res){
 	// Busqueda especifica
-	if (Object.keys(req.query).length > 0) {
+	if (Object.keys(req.query).length = 1) {
 		const nombre = req.query.q;
 
 		const sql = `SELECT nombre, email FROM usuarios WHERE nombre="${nombre}" AND tipo=1`
 		console.log(sql)
 		var connection = conectar();
 		connection.query(sql, function (err, result) {
-			if (err) return res.status(500).send({ message: `Error al recuperar el usuario: ${err}` })
+			if (err) {
+				var msg = `Error al recuperar el usuario: ${err}`;
+				logger.info();
+				logger.info(msg);
+				return res.status(500).send({ message: `${msg}` });
+			}
 			if (result.length == 0) return res.status(404).send({message: 'No existe el usuario'})
 
 		    res.status(200).send({ result })
 		});
 		connection.end();
-	//Busqueda en general
-	} else {
+		// Un usuario q cosas a comprado
+		// Ej: http://localhost:13700/api/v1/users?q=NUMA NAVARRO&tipo=compras
+	} else if (Object.keys(req.query).length > 1) {
+		const nombre = req.query.q;
+		const tipo = req.query.compras;
+		
+		const sql = `select u.nombre, i.descripcion, c.cantidad, c.total from usuarios as u
+					join compras as c
+					join items as i
+					where 
+					u.id = c.idusuario and
+					c.iditem =  i.id and
+					upper(u.nombre) like ("%${q}%");`
+		console.log(sql)
+		var connection = conectar();
+		connection.query(sql, function (err, result) {
+			if (err) {
+				var msg = `Error al recuperar el usuario: ${err}`;
+				logger.info();
+				logger.info(msg);
+				return res.status(500).send({ message: `${msg}` });
+			}
+			if (result.length == 0) return res.status(404).send({message: 'No se encontró datos'})
+
+		    res.status(200).send({ result })
+		});
+		connection.end();
+	} else {//Busqueda en general
 		var sql = `SELECT * FROM usuarios`
 		var connection = conectar();
 		connection.query(sql, function (err, users, fields) {
-			if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
+			if (err) {
+				var msg = `Error al realizar la petición: ${err}`;
+				logger.info();
+				logger.info(msg);
+				return res.status(500).send({ message: `${msg}` });
+			}
 			if (users.length == 0) return res.status(404).send({message: 'No existen usuarios'})
 
 			res.status(200).send({users})		
@@ -103,7 +150,12 @@ function getUser (req, res){
 	console.log(sql);
 	var connection = conectar();
 	connection.query(sql, function (err, result) {
-		if (err) return res.status(500).send({ message: `Error al recuperar el usuario: ${err}` });
+		if (err) {
+			var msg = `Error al recuperar el usuario: ${err}`;
+			logger.info();
+			logger.info(msg);
+			return res.status(500).send({ message: `${msg}` });
+		}
 		if (result.length == 0) return res.status(404).send({message: 'No existe el usuario'})
 
     	res.status(200).send({ result })
@@ -125,7 +177,12 @@ function deleteUser (req, res){
 	// Se deberia implementar primero una busqueda dentro de la base de datos, antes de borrar para averiguar si existe o no el usuario
 	var connection = conectar();
 	connection.query(sql, function (err, result) {
-		if (err) return res.status(500).send({ message: `Error al borrar el usuario: ${err}` })
+		if (err) {
+			var msg = `Error al borrar el usuario: ${err}`;
+			logger.info();
+			logger.info(msg);
+			return res.status(500).send({ message: `${msg}` });
+		}
 
 		res.status(204).send({ message: 'El usuario ha sido eliminado' })		
 	});
@@ -148,7 +205,12 @@ function updateUser(req, res) {
 	console.log(sql)
 	var connection = conectar();
 	connection.query(sql, function (err, result) {
-		if (err) return res.status(500).send({ message: `Error al actualizar el usuario: ${err}` });
+		if (err) {
+			var msg = `Error al actualizar el usuario: ${err}`;
+			logger.info();
+			logger.info(msg);
+			return res.status(500).send({ message: `${msg}` });
+		}
 
 		res.status(200).send({ message: 'Se actualizaron los datos del usuario' })
 	});
