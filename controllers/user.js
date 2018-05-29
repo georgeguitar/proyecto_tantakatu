@@ -41,7 +41,7 @@ function signUp (req, res) {
 function signIn (req, res) {
 	const email = req.body.email
 	const password = req.body.password
-
+	
 	const sql = `SELECT * FROM usuarios WHERE email = "${email}" AND password ="${password}"`
 	console.log(sql)
 	var connection = conectar();
@@ -75,7 +75,7 @@ function signIn (req, res) {
 */
 function getUsers (req, res){
 	// Busqueda especifica
-	if (Object.keys(req.query).length = 1) {
+	if (Object.keys(req.query).length == 1) {
 		const nombre = req.query.q;
 
 		const sql = `SELECT nombre, email FROM usuarios WHERE nombre="${nombre}" AND tipo=1`
@@ -93,33 +93,71 @@ function getUsers (req, res){
 		    res.status(200).send({ result })
 		});
 		connection.end();
-		// Un usuario q cosas a comprado
+		// Un usuario q cosas a comprado o ventido
 		// Ej: http://localhost:13700/api/v1/users?q=NUMA NAVARRO&tipo=compras
+		// Ej: http://localhost:13700/api/v1/users?q=NUMA NAVARRO&tipo=ventas
 	} else if (Object.keys(req.query).length > 1) {
+		console.log("Se entra aqui!!!")
+		console.log(req.query)
 		const nombre = req.query.q;
-		const tipo = req.query.compras;
+		const tipo = req.query.tipo;
+		// Tipo compras
+		if (tipo == "compras"){
 		
-		const sql = `select u.nombre, i.descripcion, c.cantidad, c.total from usuarios as u
-					join compras as c
-					join items as i
-					where 
-					u.id = c.idusuario and
-					c.iditem =  i.id and
-					upper(u.nombre) like ("%${q}%");`
-		console.log(sql)
-		var connection = conectar();
-		connection.query(sql, function (err, result) {
-			if (err) {
-				var msg = `Error al recuperar el usuario: ${err}`;
-				logger.info();
-				logger.info(msg);
-				return res.status(500).send({ message: `${msg}` });
-			}
-			if (result.length == 0) return res.status(404).send({message: 'No se encontró datos'})
+			const sql = `SELECT u.nombre, i.descripcion, c.cantidad, c.total FROM usuarios AS u
+						JOIN compras AS c
+						JOIN items AS i
+						WHERE 
+						u.id = c.idusuario AND
+						c.iditem =  i.id AND
+						UPPER(u.nombre) LIKE ("%${nombre}%");`
+			console.log(sql)
+			var connection = conectar();
+			connection.query(sql, function (err, result) {
+				if (err) {
+					var msg = `Error al recuperar el usuario: ${err}`;
+					logger.info();
+					logger.info(msg);
+					return res.status(500).send({ message: `${msg}` });
+				}
+				if (result.length == 0) return res.status(404).send({message: 'No se encontró datos'})
 
-		    res.status(200).send({ result })
-		});
-		connection.end();
+				res.status(200).send({ result })
+			});
+			connection.end();
+		}
+		// tipo ventas
+		if (tipo == "ventas"){
+
+			const sql = `
+			SELECT
+			usuarios.nombre,
+			items.descripcion,
+			items.precio,
+			items.cantidad,
+			items.estado
+			FROM
+			usuarios
+			INNER JOIN items ON items.id_usuario = usuarios.id
+			WHERE
+			usuarios.nombre = "${nombre}"
+			`
+			console.log(sql)
+			var connection = conectar();
+			connection.query(sql, function (err, result) {
+				if (err) {
+					var msg = `Error al recuperar el usuario: ${err}`;
+					logger.info();
+					logger.info(msg);
+					return res.status(500).send({ message: `${msg}` });
+				}
+				if (result.length == 0) return res.status(404).send({message: 'No se encontró datos'})
+
+				res.status(200).send({ result })
+			});
+			connection.end();
+		}
+
 	} else {//Busqueda en general
 		var sql = `SELECT * FROM usuarios`
 		var connection = conectar();

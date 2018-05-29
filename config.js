@@ -10,8 +10,8 @@ module.exports = {
 
 db: {
     host: 'localhost',
-    user: 'juan',
-    password: 'beatles',
-    database: 'tantakatu'    
+    user: 'root',
+    password: '12345',
+    database: 'api_rest'    
  }
 }
