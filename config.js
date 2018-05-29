@@ -8,11 +8,15 @@ module.exports = {
 //    database: 'hm2zt6g2m0gkaepr'    
 // }
 
-db: {
-    host: 'sucreciudadblanca.com',
-    user: 'sucre_numa',
-    password: 'tantakatu2018',
-    database: 'sucre_pvv',
-    port: 3306
- }
+//db: {
+//    host: 'sucreciudadblanca.com',
+//    user: 'sucre_numa',
+//    password: 'tantakatu2018',
+//    database: 'sucre_pvv',
+//    port: 3306
+// }
+
+//   db: process.env.DATABASE_URL || `mysql://j68byzqwf358bsai:i98qp92r6vdete3x@y5s2h87f6ur56vae.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hm2zt6g2m0gkaepr`
+   db: process.env.DATABASE_URL
+
 }
