@@ -1,0 +1,28 @@
+{
+  "name": "api-rest",
+  "version": "1.0.0",
+  "description": "Proyecto de API RESTful con Node.js y Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LUIS FERNANDO NUMA NAVARRO ARIAS",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "crypto": "0.0.3",
+    "express": "^4.16.0",
+    "express-handlebars": "^3.0.0",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.22.0",
+    "mongoose": "^5.0.17",
+    "mysql": "^2.15.0",
+    "nodemailer": "^4.6.5",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
