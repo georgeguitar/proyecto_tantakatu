@@ -16,8 +16,5 @@ module.exports = {
 //    port: 3306
 // }
 
-//   db: `` || `mysql://j68byzqwf358bsai:i98qp92r6vdete3x@y5s2h87f6ur56vae.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hm2zt6g2m0gkaepr`
-//db: process.env.JAWSDB_MARIA_URL || process.env.JAWSDB_URL
-db: process.env.DATABASE_URL
-
+db: process.env.JAWSDB_MARIA_URL || process.env.JAWSDB_URL
 }
