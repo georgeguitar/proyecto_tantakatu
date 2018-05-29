@@ -12,6 +12,7 @@ db: {
     host: 'www.sucreciudadblanca.com',
     user: 'sucre_numa',
     password: 'tantakatu2018',
-    database: 'sucre_pvv'    
+    database: 'sucre_pvv',
+    port: 3306
  }
 }
