@@ -43,7 +43,6 @@ CREATE TABLE `items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `categorias`;
-
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -51,3 +50,13 @@ CREATE TABLE `categorias` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+DROP TABLE IF EXISTS `compras`;
+CREATE TABLE .`compras` (
+  `idusuario` INT NOT NULL,
+  `iditem` INT NOT NULL,
+  `cantidad` INT NOT NULL,
+  `total` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
