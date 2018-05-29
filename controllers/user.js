@@ -140,7 +140,7 @@ function getUsers (req, res){
 			usuarios
 			INNER JOIN items ON items.id_usuario = usuarios.id
 			WHERE
-			usuarios.nombre = "${nombre}"
+			UPPER(usuarios.nombre) LIKE UPPER("%${nombre}%")
 			`
 			console.log(sql)
 			var connection = conectar();

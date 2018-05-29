@@ -16,6 +16,7 @@ api.get('/items/:id', auth, itemCtrl.getItem)
 api.post('/items', auth, itemCtrl.insertItem)
 api.delete('/items/:id', auth, itemCtrl.deleteItem)
 api.put('/items/:id', auth, itemCtrl.updateItem)
+api.get('/items/search/:id', auth, itemCtrl.getSearch)
 
 /**
 * Modulo categorias
