@@ -9,9 +9,9 @@ module.exports = {
 // }
 
 db: {
-    host: 'localhost',
-    user: 'root',
-    password: '12345',
-    database: 'api_rest'    
+    host: 'www.sucreciudadblanca.com',
+    user: 'sucre_numa',
+    password: 'tantakatu2018',
+    database: 'sucre_pvv'    
  }
 }
