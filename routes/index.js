@@ -17,6 +17,7 @@ api.post('/items', auth, itemCtrl.insertItem)
 api.delete('/items/:id', auth, itemCtrl.deleteItem)
 api.put('/items/:id', auth, itemCtrl.updateItem)
 
+
 /**
 * Modulo categorias
 **/

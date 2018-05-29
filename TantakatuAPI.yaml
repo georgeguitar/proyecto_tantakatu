@@ -326,13 +326,7 @@ paths:
           description: usuario not found
       security:
       - api_key: []
-  /compras:
-    get:
-      tags:
-      - compras
-      summary: Lista todas las compras
-      description: Muestra la lista de todas las compras
-      operationId: ListarCompras
+
       produces:
         - application/json
         - application/xml

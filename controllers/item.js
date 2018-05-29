@@ -59,6 +59,38 @@ function getItem (req, res) {
    connection.end();
 }
 
+// Ej. http://localhost:13700/api/v1/items/search/:id
+function getSearch (req, res){
+	const descripcion = req.params.id
+	console.log(descripcion)
+
+	var sql = `
+			SELECT
+			usuarios.nombre,
+			items.descripcion
+			FROM
+			usuarios
+			INNER JOIN compras ON usuarios.id = compras.idusuario
+			INNER JOIN items ON items.id = compras.iditem
+			WHERE
+			UPPER(items.descripcion) LIKE UPPER("%${descripcion}%")
+			GROUP BY
+			usuarios.nombre
+			`
+	console.log(sql);
+	var connection = conectar();
+	connection.query(sql, function (err, result) {
+			if (err) {
+				var msg = `Error al recuperar los items: ${err}`;
+				logger.info();
+				logger.info(msg);    		
+				return res.status(500).send({ message: `${msg}` });
+			}
+			res.status(200).send({ result })
+		});
+	connection.end();
+}
+
 //Ej. http://localhost:13700/api/v1/items
 function insertItem (req, res) {
 	const descripcion = req.body.descripcion;
@@ -148,5 +180,6 @@ module.exports = {
 	getItem,
 	insertItem,
 	deleteItem,
-	updateItem
+	updateItem,
+	getSearch
 }
