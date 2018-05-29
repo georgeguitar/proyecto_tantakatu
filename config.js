@@ -9,7 +9,7 @@ module.exports = {
 // }
 
 db: {
-    host: 'www.sucreciudadblanca.com',
+    host: 'sucreciudadblanca.com',
     user: 'sucre_numa',
     password: 'tantakatu2018',
     database: 'sucre_pvv',
