@@ -7,6 +7,13 @@ module.exports = {
 //    password: 'i98qp92r6vdete3x',
 //    database: 'hm2zt6g2m0gkaepr'    
 // }
+  
+//db: {
+//host: 'c9cujduvu830eexs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+//user: 'i0l5aooujiq9m2qf',
+//password: 'jni80ltt763w13oa',
+//database: 'f6xrltohq6ji1ouq'    
+//}  
 
 //db: {
 //    host: 'sucreciudadblanca.com',
